@@ -1,0 +1,101 @@
+/*
+Theme Name: Cpz Naked Theme
+Theme URI: https://github.com/CristianCPZz/cpz-naked-theme
+Author: Cristian Cpz
+Author URI: https://www.linkedin.com/in/cristian-cpz
+Description: Tema WordPress essenziale compatibile con Elementor e WooCommerce, ottimizzato per SEO e accessibilità.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: cpz-naked-theme
+Tags: custom-background, custom-logo, custom-menu, featured-images, theme-options, translation-ready
+*/
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+[role="banner"] {
+  display: flex;
+  background: #eee;
+  
+}
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.site-branding img {
+   /* width: 200px;*/
+    height: 60px;
+    object-fit: contain;
+    display: block;
+}
+[role="navigation"] ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+[role="navigation"] ul li {
+  display: inline-block;
+  padding: 0.4em 1em;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  margin-right: 1em;
+}
+
+.header-inner,
+[role="contentinfo"] {
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+}
+.cpz-copyright {
+  padding: 0.8em 0;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  [role="banner"] {
+    padding: 0.2em 0.5em;
+  }
+  .header-inner {
+    flex-direction: row; 
+    align-items: center;
+  }
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+  [role="navigation"] ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #eee;
+    margin: 0;
+    padding: 0.5em 0;
+    position: absolute;
+    left: 0;
+    top: 10%;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  }
+  [role="navigation"].menu-open ul,
+  [role="navigation"][data-menu-open="true"] ul {
+    display: flex;
+  }
+  .site-branding img {
+    width: auto;
+    max-height: 60px;
+  }
+}

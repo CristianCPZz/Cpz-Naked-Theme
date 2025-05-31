@@ -1,0 +1,12 @@
+Copyright (c) Cristian Cpz
+https://www.linkedin.com/in/cristian-cpz
+
+This theme is free to use, modify, and redistribute for non-commercial and personal projects.
+
+Commercial usage (including in client projects or monetized websites) is permitted **only upon approval** from the author. You must contact the author to describe your intended use and obtain written permission.
+
+The author reserves the right to deny commercial usage on a case-by-case basis.
+
+Redistribution of this theme under another name or as part of a paid theme package is strictly prohibited without permission.
+
+This license is not compatible with the GNU GPL, and the theme is not eligible for inclusion in the official WordPress repository.
