@@ -25,9 +25,11 @@ This theme includes a lightweight `cpz-light-reset.css` file to help normalize s
 To disable it, remove the following line from your `functions.php` file:
 
 --- 
+```
   /* optional reset */
     wp_enqueue_style('cpz-light-reset', get_template_directory_uri() . '/assets/css/light-reset.css', [], null);
   /* end optional reset */
+```
 ---
 
 
@@ -37,7 +39,8 @@ See `LICENSE.txt` for full licensing terms.
 
 ## Commercial Use
 
-Free for personal use. Commercial use requires prior approval from the author. See `LICENSE.txt`.
+Free for personal use. Commercial use is allowed free of charge, but requires prior approval from the author.
+See `LICENSE.txt`.
 
 ---
 
