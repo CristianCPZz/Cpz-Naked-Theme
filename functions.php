@@ -2,59 +2,66 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
-function cpz_theme_setup() {
-    add_theme_support('title-tag');
-    add_theme_support('post-thumbnails');
-    add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption']);
-    add_theme_support('custom-logo');
-    add_theme_support('menus');
 
-    // WooCommerce support
-    add_theme_support('woocommerce');
-    add_theme_support('wc-product-gallery-zoom');
-    add_theme_support('wc-product-gallery-lightbox');
-    add_theme_support('wc-product-gallery-slider');
-
-    register_nav_menus([
-        'main-menu' => __('Main Menu', 'cpz-naked-theme')
-    ]);
-
-    // Remove Gutenberg's automatic <style> output
-    remove_action('wp_enqueue_scripts', 'wp_enqueue_block_styles');
-    remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
+if ( ! isset( $content_width ) ) {
+	$content_width = 1920;
 }
-add_action('after_setup_theme', 'cpz_theme_setup');
+
+function cpz_theme_setup() {
+	add_theme_support( 'title-tag' );
+	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
+	add_theme_support( 'custom-logo' );
+	add_theme_support( 'menus' );
+
+	// WooCommerce support
+	add_theme_support( 'woocommerce' );
+	add_theme_support( 'wc-product-gallery-zoom' );
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	add_theme_support( 'wc-product-gallery-slider' );
+
+	register_nav_menus(
+		array(
+			'main-menu' => __( 'Main Menu', 'cpz-naked-theme' ),
+		)
+	);
+
+	// Remove Gutenberg's automatic <style> output
+	remove_action( 'wp_enqueue_scripts', 'wp_enqueue_block_styles' );
+	remove_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
+}
+add_action( 'after_setup_theme', 'cpz_theme_setup' );
 
 function cpz_elementor_support() {
-    add_theme_support('elementor');
+	add_theme_support( 'elementor' );
 }
-add_action('after_setup_theme', 'cpz_elementor_support');
+add_action( 'after_setup_theme', 'cpz_elementor_support' );
 
 function cpz_enqueue_all_styles() {
-    /* optional reset */
-    wp_enqueue_style('cpz-light-reset', get_template_directory_uri() . '/assets/css/light-reset.css', [], null);
-    /* end optional reset */
-    wp_enqueue_style('cpz-style', get_stylesheet_uri());
-    if (cpz_conditional_css_fallback_should_enqueue()) {
-        wp_enqueue_style('cpz-fallback-style', get_template_directory_uri() . '/starter.css');
-    }
+	/* optional reset */
+	wp_enqueue_style( 'cpz-light-reset', get_template_directory_uri() . '/assets/css/light-reset.css', array(), null );
+	/* end optional reset */
+	wp_enqueue_style( 'cpz-style', get_stylesheet_uri() );
+	if ( cpz_conditional_css_fallback_should_enqueue() ) {
+		wp_enqueue_style( 'cpz-fallback-style', get_template_directory_uri() . '/starter.css' );
+	}
 }
-add_action('wp_enqueue_scripts', 'cpz_enqueue_all_styles');
+add_action( 'wp_enqueue_scripts', 'cpz_enqueue_all_styles' );
 
 function cpz_naked_theme_setup() {
-    load_theme_textdomain('cpz-naked-theme', get_template_directory() . '/languages');
+	load_theme_textdomain( 'cpz-naked-theme', get_template_directory() . '/languages' );
 }
-add_action('after_setup_theme', 'cpz_naked_theme_setup');
+add_action( 'after_setup_theme', 'cpz_naked_theme_setup' );
 
-function cpz_naked_add_body_class($classes) {
-    $classes[] = 'cpz-nk-' . md5('Cpz Naked Theme');
-    return $classes;
+function cpz_naked_add_body_class( $classes ) {
+	$classes[] = 'cpz-nk-' . md5( 'Cpz Naked Theme' );
+	return $classes;
 }
-add_filter('body_class', 'cpz_naked_add_body_class');
+add_filter( 'body_class', 'cpz_naked_add_body_class' );
 
 
 function cpz_e_active() {
-    return defined('ELEMENTOR_VERSION');
+	return defined( 'ELEMENTOR_VERSION' );
 }
 
 if ( ! function_exists( 'cpz_elementor_check_hide_title' ) ) {
@@ -79,117 +86,136 @@ add_filter( 'cpz_elementor_page_title', 'cpz_elementor_check_hide_title' );
 
 if ( cpz_e_active() ) {
 
-    // Elementor-related global variables and functions
-    global $elementor_header_output, $elementor_footer_output, $elementor_header_enabled, $elementor_footer_enabled, $custom_header_output;
+	// Elementor-related global variables and functions
+	global $elementor_header_output, $elementor_footer_output, $elementor_header_enabled, $elementor_footer_enabled, $custom_header_output;
 
-    // Safely include a PHP partial and return its output as a string
-    function get_partial_output($path) {
-        $theme_dir = realpath(get_template_directory());
-        $real_path = realpath($path);
-        if ($real_path && strpos($real_path, $theme_dir) === 0 && file_exists($real_path)) {
-            ob_start();
-            include $real_path;
-            return ob_get_clean();
-        }
-        return '';
-    }
+	// Safely include a PHP partial and return its output as a string
+	function get_partial_output( $path ) {
+		$theme_dir = realpath( get_template_directory() );
+		$real_path = realpath( $path );
+		if ( $real_path && strpos( $real_path, $theme_dir ) === 0 && file_exists( $real_path ) ) {
+			ob_start();
+			include $real_path;
+			return ob_get_clean();
+		}
+		return '';
+	}
 
-    function check_elementor_location_once($location) {
-        static $cache = [];
+	function check_elementor_location_once( $location ) {
+		static $cache = array();
 
-        if (isset($cache[$location])) {
-            return $cache[$location];
-        }
+		if ( isset( $cache[ $location ] ) ) {
+			return $cache[ $location ];
+		}
 
-        if (!function_exists('elementor_theme_do_location')) {
-            return false;
-        }
+		if ( ! function_exists( 'elementor_theme_do_location' ) ) {
+			return false;
+		}
 
-        ob_start();
-        $result = elementor_theme_do_location($location);
-        $output = ob_get_clean();
+		ob_start();
+		$result = elementor_theme_do_location( $location );
+		$output = ob_get_clean();
 
-        if ($location === 'header') {
-            $GLOBALS['elementor_header_output'] = $output;
-        } elseif ($location === 'footer') {
-            $GLOBALS['elementor_footer_output'] = $output;
-        }
+		if ( $location === 'header' ) {
+			$GLOBALS['elementor_header_output'] = $output;
+		} elseif ( $location === 'footer' ) {
+			$GLOBALS['elementor_footer_output'] = $output;
+		}
 
-        $cache[$location] = $result;
-        return $result;
-    }
+		$cache[ $location ] = $result;
+		return $result;
+	}
 
-    function get_elementor_header_enabled() {
-        global $elementor_header_enabled;
-        if (!isset($elementor_header_enabled)) {
-            $elementor_header_enabled = check_elementor_location_once('header');
-        }
-        return $elementor_header_enabled;
-    }
+	function get_elementor_header_enabled() {
+		global $elementor_header_enabled;
+		if ( ! isset( $elementor_header_enabled ) ) {
+			$elementor_header_enabled = check_elementor_location_once( 'header' );
+		}
+		return $elementor_header_enabled;
+	}
 
-    function get_elementor_footer_enabled() {
-        global $elementor_footer_enabled;
-        if (!isset($elementor_footer_enabled)) {
-            $elementor_footer_enabled = check_elementor_location_once('footer');
-        }
-        return $elementor_footer_enabled;
-    }
+	function get_elementor_footer_enabled() {
+		global $elementor_footer_enabled;
+		if ( ! isset( $elementor_footer_enabled ) ) {
+			$elementor_footer_enabled = check_elementor_location_once( 'footer' );
+		}
+		return $elementor_footer_enabled;
+	}
 
-    add_action('template_redirect', function () {
-        global $elementor_header_enabled, $elementor_footer_enabled, $custom_header_output;
+	add_action(
+		'template_redirect',
+		function () {
+			global $elementor_header_enabled, $elementor_footer_enabled, $custom_header_output;
 
-        // Popola flags e output Elementor
-        $elementor_header_enabled = get_elementor_header_enabled();
-        $elementor_footer_enabled = get_elementor_footer_enabled();
+			// Popola flags e output Elementor
+			$elementor_header_enabled = get_elementor_header_enabled();
+			$elementor_footer_enabled = get_elementor_footer_enabled();
 
-        // Cattura l'output del partial custom se serve
-        if (!$elementor_header_enabled && $elementor_footer_enabled) {
-            $partial_path = locate_template('partials/header.php');
-            $custom_header_output = get_partial_output($partial_path);
-        }
+			// Cattura l'output del partial custom se serve
+			if ( ! $elementor_header_enabled && $elementor_footer_enabled ) {
+				$partial_path         = locate_template( 'partials/header.php' );
+				$custom_header_output = get_partial_output( $partial_path );
+			}
 
-        // Apply buffer
-        ob_start(function ($buffer) use ($elementor_header_enabled, $elementor_footer_enabled, $custom_header_output) {
-            if ($elementor_header_enabled) {
-                $buffer = preg_replace('/<body([^>]*)>/', '<body$1>' . $GLOBALS['elementor_header_output'], $buffer, 1);
-            } elseif (!$elementor_header_enabled && $elementor_footer_enabled && $custom_header_output) {
-                $buffer = preg_replace('/<body([^>]*)>/', '<body$1>' . $custom_header_output, $buffer, 1);
-            }
-            return $buffer;
-        });
-    });
+			// Apply buffer
+			ob_start(
+				function ( $buffer ) use ( $elementor_header_enabled, $elementor_footer_enabled, $custom_header_output ) {
+					if ( $elementor_header_enabled ) {
+						$cpz_skip_link = '<a class="skip-link screen-reader-text" href="#main-content">' . esc_html__( 'Skip to content', 'cpz-naked-theme' ) . '</a>';
+						$buffer        = preg_replace( '/<body([^>]*)>/', '<body$1>' . $cpz_skip_link . $GLOBALS['elementor_header_output'], $buffer, 1 );
+					} elseif ( ! $elementor_header_enabled && $elementor_footer_enabled && $custom_header_output ) {
+						$cpz_skip_link = '<a class="skip-link screen-reader-text" href="#main-content">' . esc_html__( 'Skip to content', 'cpz-naked-theme' ) . '</a>';
+						$buffer        = preg_replace( '/<body([^>]*)>/', '<body$1>' . $cpz_skip_link . $custom_header_output, $buffer, 1 );
+					}
+					return $buffer;
+				}
+			);
+		}
+	);
 
 
-    add_action('wp_footer', function() {
+	add_action(
+		'wp_footer',
+		function () {
 
-        global $elementor_footer_output, $elementor_footer_enabled, $elementor_header_enabled;
+			global $elementor_footer_output, $elementor_footer_enabled, $elementor_header_enabled;
 
-        if ($elementor_footer_enabled) {
-            echo $elementor_footer_output;
-            get_template_part('partials/footer');
-        } elseif ($elementor_header_enabled && ! $elementor_footer_enabled) {
-            get_template_part('partials/footer');
-        }
-    });
+			if ( $elementor_footer_enabled ) {
+				echo $elementor_footer_output;
+				get_template_part( 'partials/footer' );
+			} elseif ( $elementor_header_enabled && ! $elementor_footer_enabled ) {
+				get_template_part( 'partials/footer' );
+			}
+		}
+	);
 
 
 }
 
 function cpz_conditional_css_fallback_should_enqueue() {
-    if ( cpz_e_active() && class_exists('\Elementor\Plugin') && (is_single() || is_archive() || is_tax() ) &&
-        ! \Elementor\Plugin::$instance->documents->get(get_the_ID())->is_built_with_elementor()
-    ) {
-        return true;
-    } elseif ( ! cpz_e_active() ) {
-        return true;
-    }
-    return false;
+	if ( ! cpz_e_active() ) {
+		return true;
+	}
+
+	if ( ! class_exists( '\Elementor\Plugin' ) || ! ( is_single() || is_archive() || is_tax() ) ) {
+		return false;
+	}
+
+	$current_doc = \Elementor\Plugin::$instance->documents->get( get_the_ID() );
+	if ( $current_doc && ! $current_doc->is_built_with_elementor() ) {
+		return true;
+	}
+
+	return false;
 }
 
 function cpz_enqueue_theme_scripts() {
-    wp_enqueue_script(
-        'cpz-script', get_template_directory_uri() . '/assets/js/script.js',
-        [], null, true
-    );
+	wp_enqueue_script(
+		'cpz-script',
+		get_template_directory_uri() . '/assets/js/script.js',
+		array(),
+		null,
+		true
+	);
 }
-add_action('wp_enqueue_scripts', 'cpz_enqueue_theme_scripts');
+add_action( 'wp_enqueue_scripts', 'cpz_enqueue_theme_scripts' );

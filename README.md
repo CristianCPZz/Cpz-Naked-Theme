@@ -39,7 +39,7 @@ See `LICENSE.txt` for full licensing terms.
 
 ## Commercial Use
 
-Free for personal use. Commercial use is allowed free of charge, but requires prior approval from the author.
+**Free for everyone** — personal and commercial use. Commercial use is allowed free of charge, but requires prior approval from the author (no payment required).
 See `LICENSE.txt`.
 
 ---

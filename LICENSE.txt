@@ -1,9 +1,11 @@
 Copyright (c) Cristian Cpz
 https://www.linkedin.com/in/cristian-cpz
 
-This theme is free to use, modify, and redistribute for non-commercial and personal projects.
+## License — Cpz Custom License
 
-Commercial usage (including in client projects or monetized websites) is permitted **only upon approval** from the author. You must contact the author to describe your intended use and obtain written permission.
+This theme is **free for everyone**, for any purpose, including personal and commercial use.
+
+**Commercial use** (e.g., client projects, monetized websites) is permitted free of charge, but requires prior notification/approval from the author. Simply contact the author to describe your intended use — no payment is required.
 
 The author reserves the right to deny commercial usage on a case-by-case basis.
 

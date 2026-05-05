@@ -4,9 +4,9 @@ Theme URI: https://github.com/CristianCPZz/cpz-naked-theme
 Author: Cristian Cpz
 Author URI: https://www.linkedin.com/in/cristian-cpz
 Description: Tema WordPress essenziale compatibile con Elementor e WooCommerce, ottimizzato per SEO e accessibilità.
-Version: 1.0
-License: GNU General Public License v2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Version: 1.1.0
+License: Cpz Custom License
+License URI: https://github.com/CristianCPZz/cpz-naked-theme/blob/main/LICENSE.txt
 Text Domain: cpz-naked-theme
 Tags: custom-background, custom-logo, custom-menu, featured-images, theme-options, translation-ready
 */
@@ -21,10 +21,9 @@ body {
 main {
   flex: 1;
 }
-[role="banner"] {
+.site-header {
   display: flex;
   background: #eee;
-  
 }
 .header-inner {
   display: flex;
@@ -37,11 +36,11 @@ main {
     object-fit: contain;
     display: block;
 }
-[role="navigation"] ul {
+.main-navigation ul {
   display: flex;
   flex-wrap: wrap;
 }
-[role="navigation"] ul li {
+.main-navigation ul li {
   display: inline-block;
   padding: 0.4em 1em;
 }
@@ -55,7 +54,7 @@ main {
 }
 
 .header-inner,
-[role="contentinfo"] {
+.cpz-footer {
   max-width: 1200px;
   width: 100%;
   margin: auto;
@@ -65,8 +64,56 @@ main {
   text-align: right;
 }
 
+/* Focus visible indicator (WCAG 2.4.13 AA) */
+:focus-visible {
+    outline: 2px solid #111;
+    outline-offset: 2px;
+}
+
+/* Skip link: hidden by default, visible on focus (WCAG 2.4.1 A) */
+.skip-link:focus {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 0.5em 1em;
+    background: #111;
+    color: #fff;
+    z-index: 100000;
+    clip: auto;
+    clip-path: none;
+    white-space: normal;
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+}
+
+/* Screen-reader only text (WCAG 2.2 AA) */
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+input[type="checkbox"] {
+    appearance: checkbox;
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin: 0 0.5em 0 0;
+    vertical-align: middle;
+}
+
 @media (max-width: 768px) {
-  [role="banner"] {
+  .site-header {
     padding: 0.2em 0.5em;
   }
   .header-inner {
@@ -77,7 +124,7 @@ main {
     display: block;
     margin-left: auto;
   }
-  [role="navigation"] ul {
+  .main-navigation ul {
     display: none;
     flex-direction: column;
     width: 100%;
@@ -90,8 +137,8 @@ main {
     z-index: 1000;
     box-shadow: 0 4px 12px rgba(0,0,0,0.04);
   }
-  [role="navigation"].menu-open ul,
-  [role="navigation"][data-menu-open="true"] ul {
+  .main-navigation.menu-open ul,
+  .main-navigation[data-menu-open="true"] ul {
     display: flex;
   }
   .site-branding img {
