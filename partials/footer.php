@@ -4,6 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="footer cpz-footer">
-	<p class="cpz-copyright">&copy; <?php echo date( 'Y' ); ?> <a href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Homepage', 'cpz-naked-theme' ); ?>"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></a></p>
+	<p class="cpz-copyright">&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <a href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Homepage', 'cpz-naked-theme' ); ?>"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></a></p>
 </div>
 <!-- Cpz naked theme -->

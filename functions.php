@@ -116,9 +116,9 @@ if ( cpz_e_active() ) {
 		$result = elementor_theme_do_location( $location );
 		$output = ob_get_clean();
 
-		if ( $location === 'header' ) {
+		if ( 'header' === $location ) {
 			$GLOBALS['elementor_header_output'] = $output;
-		} elseif ( $location === 'footer' ) {
+		} elseif ( 'footer' === $location ) {
 			$GLOBALS['elementor_footer_output'] = $output;
 		}
 
@@ -181,7 +181,7 @@ if ( cpz_e_active() ) {
 			global $elementor_footer_output, $elementor_footer_enabled, $elementor_header_enabled;
 
 			if ( $elementor_footer_enabled ) {
-				echo $elementor_footer_output;
+				echo $elementor_footer_output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				get_template_part( 'partials/footer' );
 			} elseif ( $elementor_header_enabled && ! $elementor_footer_enabled ) {
 				get_template_part( 'partials/footer' );

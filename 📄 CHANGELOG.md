@@ -15,12 +15,14 @@
 ### Fixed
 - removed debug `console.log`, added escaping and `aria-label`, hardcoded URL, duplicate closing tags
 - Redundant ARIA roles removed from HTML5 elements (`banner`, `navigation`, `main`, `contentinfo`)
+- `date()` → `gmdate()` with escaping in footer.php and partials/footer.php (timezone safety)
+- Yoda conditions in functions.php (WordPress coding standards)
+- Added phpcs:ignore for Elementor output (required for Elementor integration)
 
 ## 1.0.1 - Improved WooCommerce Compatibility
 - Improved compatibility with WooCommerce
 
 ## 1.0.0 - Initial Release
-
 - First public release
 - Elementor and WooCommerce compatibility
 - Basic styling and accessibility setup

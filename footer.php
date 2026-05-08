@@ -16,7 +16,7 @@ if ( ! $cpz_skip_theme_footer && function_exists( 'get_elementor_header_enabled'
 <footer class="footer cpz-footer">
 	<p class="cpz-copyright">
 		<small>
-			&copy; <?php echo date( 'Y' ); ?>
+			&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Homepage', 'cpz-naked-theme' ); ?>">
 				<?php echo esc_html( get_bloginfo( 'name' ) ); ?>
 			</a>
